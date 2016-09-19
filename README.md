@@ -1,7 +1,7 @@
 # pythonmachinelearning
 As part of my learn python initiatve I am working through Sebastian Raschka book "Python Machine Learning"
 
-<b>Raschka, Sebastian (2015-09-23). Python Machine Learning . Packt Publishing. <b>
+<b>Raschka, Sebastian (2015-09-23). Python Machine Learning . Packt Publishing. </b>
 
 This repo contains artifacts generated while reading Python Machine Learning. Most of the code is based on the coding examples presented in the book along with some refactors to convert the examples from a interactive mode focus to resuable modules. Also liberties have been taken to learn some of the constructs of python.
 
