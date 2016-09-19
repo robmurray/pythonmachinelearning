@@ -14,6 +14,7 @@ Alot of the code relies on:
 
 (I have included a requirements.txt with the full list of dependencies)
 
-Feel free to clone, reuse in any manor, keeping in mind the intent of this code is to explore Python from ML perspective. no attempt to create production quality code has been taken. Also these are my early days in python (I am primarily a java guy) and most importantly the work is heavily based on Sebastian Raschka's book. 
+## disclaimer
+Feel free to clone, reuse in any manor, keeping in mind the intent of this code is to study Python from a ML perspective. no attempt to create production quality code has been taken. Also these are my early python days (I am primarily a java guy) and most importantly the work is heavily based on Sebastian Raschka's book. 
 
 
