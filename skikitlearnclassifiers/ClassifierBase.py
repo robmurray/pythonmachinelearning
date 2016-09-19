@@ -5,6 +5,18 @@ from sklearn.preprocessing import StandardScaler
 from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import warnings
+import logging
+
+'''
+    A base class for exploring skikit-learn classifiers.
+      - loads iris dataset
+      - split data into training and test data
+      - performs feature standardization
+      - defines useful methods for predictions and plotting of data
+
+'''
+
+logger = logging.getLogger(__name__)
 
 
 class ClassifierBase(object):
@@ -14,7 +26,8 @@ class ClassifierBase(object):
         self.iris = datasets.load_iris()
         self.X = self.iris.data[:, [2, 3]]
         self.y = self.iris.target
-        print('Class labels:', np.unique(self.y))
+
+        logger.debug('Class labels: %s', np.unique(self.y))
 
         # split into training and test data
         self.X_train, self.X_test, self.y_train, self.y_test = \
