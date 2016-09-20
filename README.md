@@ -3,14 +3,9 @@ As part of my learn python initiatve I am working through Sebastian Raschka book
 
 <b>Raschka, Sebastian (2015-09-23). Python Machine Learning . Packt Publishing. </b>
 
-This repo contains artifacts generated while reading Python Machine Learning. Most of the code is based on the coding examples presented in the book along with some refactors to convert the examples from a interactive mode focus to resuable modules. Also liberties have been taken to learn some of the constructs of python.
+This repo contains artifacts generated while reading Python Machine Learning. The code is based on the coding examples presented in the book along with some refactors to convert the examples from a interactive mode focus to resuable modules. Also liberties have been taken to learn some of the constructs of python.
 
-Alot of the code relies on: 
-                    NumPy
-                    SciPy
-                    scikit-learn 
-                    matplotlib 
-                    pandas
+Alot of the code relies on: NumPy,SciPy,scikit-learn, matplotlib,pandas
 
 (I have included a requirements.txt with the full list of dependencies)
 

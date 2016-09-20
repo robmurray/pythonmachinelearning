@@ -22,34 +22,49 @@ logger = logging.getLogger(__name__)
 class ClassifierBase(object):
 
     def __init__(self):
-        # load the data
+        logger.info('loading iris dataset')
+
         self.iris = datasets.load_iris()
         self.X = self.iris.data[:, [2, 3]]
         self.y = self.iris.target
 
-        logger.debug('Class labels: %s', np.unique(self.y))
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug('X shape: %s',self.X.shape)
+            logger.debug('Y shape: %s', self.y.shape)
+            logger.debug('Class labels: %s', np.unique(self.y))
 
         # split into training and test data
         self.X_train, self.X_test, self.y_train, self.y_test = \
             train_test_split(self.X, self.y, test_size=0.3, random_state=0)
 
-        # standarize the features
+        logger.info('standardizing features')
         sc = StandardScaler()
         sc.fit(self.X_train)
         self.X_train_std = sc.transform(self.X_train)
         self.X_test_std = sc.transform(self.X_test)
 
     def cost_1(self,z):
-        return - np.log(self.sigmoid(z))
+        cost = - np.log(self.sigmoid(z))
+        logger.debug('cost1: %s', cost)
+        return cost
 
     def cost_0(self,z):
-        return - np.log(1 - self.sigmoid(z))
+        cost2 = - np.log(1 - self.sigmoid(z))
+        logger.debug('cost2: %s', cost2)
+        return cost2
 
     def sigmoid(self,z):
-        return 1.0 / (1.0 + np.exp(-z))
+        sigmoid=1.0 / (1.0 + np.exp(-z))
+        logger.debug('sigmoid: %s', sigmoid)
+        return sigmoid
 
     def versiontuple(self,v):
-        return tuple(map(int, (v.split("."))))
+        rettuple =tuple(map(int, (v.split("."))))
+        if logger.isEnabledFor(logging.DEBUG):
+            logging.debug('version: %s',v)
+            logging.debug('tuple: %s', rettuple)
+
+        return rettuple
 
     def plot_decision_regions(self,X, y, classifier, test_idx=None, resolution=0.02):
 

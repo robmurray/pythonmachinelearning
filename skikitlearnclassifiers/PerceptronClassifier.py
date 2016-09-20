@@ -3,21 +3,25 @@ from sklearn.linear_model import Perceptron
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from skikitlearnclassifiers.ClassifierBase import ClassifierBase
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class PerceptronClassifier(ClassifierBase):
 
     def plot(self):
-        #Perceptron
+        logger.info('plotting perseptron')
         ppn = Perceptron(n_iter=40, eta0=0.1, random_state=0)
         ppn.fit(self.X_train_std, self.y_train)
-        print (ppn)
-        print(self.y_test.shape)
+
+        logger.debug('Perceptron: %s', ppn)
 
         # results
         y_pred = ppn.predict(self.X_test_std)
-        print('Misclassified samples: %d' % (self.y_test != y_pred).sum())
-        print('Accuracy: %.2f' % accuracy_score(self.y_test, y_pred))
+
+        logger.info('Misclassified samples: %d' % (self.y_test != y_pred).sum())
+        logger.info('Accuracy: %.2f' % accuracy_score(self.y_test, y_pred))
 
         #plot
         X_combined_std = np.vstack((self.X_train_std, self.X_test_std))
@@ -28,7 +32,7 @@ class PerceptronClassifier(ClassifierBase):
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
-
-        plt.tight_layout()
+        plt.title('Perceptron classifier')
+        #plt.tight_layout()
         # plt.savefig('./figures/iris_perceptron_scikit.png', dpi=300)
         plt.show()
