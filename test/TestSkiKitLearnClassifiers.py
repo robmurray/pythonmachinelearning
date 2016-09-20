@@ -6,6 +6,7 @@ from skikitlearnclassifiers import PerceptronClassifier
 from skikitlearnclassifiers import SupportVectorMachine
 from skikitlearnclassifiers import KernalSVMNonLinearProblem
 
+
 class TestSkiKitLearnClassifiers(unittest.TestCase):
 
     def test_linear_regression(self):
