@@ -1,7 +1,7 @@
 from sklearn.linear_model import Perceptron
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
-from skikitlearnclassifiers.ClassifierBase import ClassifierBase
+from sklearnclassifiers.ClassifierBase import ClassifierBase
 import logging
 
 logger = logging.getLogger(__name__)

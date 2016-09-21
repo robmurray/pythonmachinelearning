@@ -1,8 +1,9 @@
-from skikitlearnclassifiers.ClassifierUtils import ClassifierUtils as cu
+from sklearnclassifiers.ClassifierUtils import ClassifierUtils as cu
 import logging
 
 '''
-   
+   Base class for doing a little exploratory programming with
+   sklearn
 
 '''
 

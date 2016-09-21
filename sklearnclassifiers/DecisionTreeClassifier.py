@@ -2,9 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import logging
 from sklearn.tree import DecisionTreeClassifier as dtc
-from skikitlearnclassifiers.ClassifierBase import ClassifierBase
+from sklearnclassifiers.ClassifierBase import ClassifierBase
 
 logger = logging.getLogger(__name__)
+
+
+#fixme broken class
 
 
 class DecisionTreeClassifier(ClassifierBase):

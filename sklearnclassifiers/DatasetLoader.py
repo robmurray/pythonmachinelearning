@@ -7,6 +7,11 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+'''
+Loads, splits, standardizes the built-in sklearn iris dataset
+
+'''
+
 
 class DatasetLoader(object):
 

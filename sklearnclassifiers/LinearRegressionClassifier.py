@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
-from skikitlearnclassifiers.ClassifierBase import ClassifierBase
+from sklearnclassifiers.ClassifierBase import ClassifierBase
 import logging
 
 logger = logging.getLogger(__name__)

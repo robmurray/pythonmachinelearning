@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.svm import SVC
 import matplotlib.pyplot as plt
-from skikitlearnclassifiers.ClassifierBase import ClassifierBase
+from sklearnclassifiers.ClassifierBase import ClassifierBase
 import logging
 
 logger = logging.getLogger(__name__)

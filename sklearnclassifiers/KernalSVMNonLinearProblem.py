@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.svm import SVC
 import logging
 
-from skikitlearnclassifiers.ClassifierBase import ClassifierBase
+from sklearnclassifiers.ClassifierBase import ClassifierBase
 
 logger = logging.getLogger(__name__)
 
@@ -14,8 +14,8 @@ class KernalSVMNonLinearProblem(ClassifierBase):
         super(self.__class__, self).__init__(datasetloader)
         logger.debug('Linear regression')
 
-    def plot(self):
-        logger.info('using KernalSVM')
+    def plot_scatter(self):
+        logger.info('showing scatter plot')
 
         np.random.seed(0)
         X_xor = np.random.randn(200, 2)
@@ -39,7 +39,15 @@ class KernalSVMNonLinearProblem(ClassifierBase):
         # plt.savefig('./figures/xor.png', dpi=300)
         plt.show()
 
-        svm = SVC(kernel='rbf', random_state=0, gamma=0.10, C=10.0)
+    def plot_xor(self,kernel='rbf', random_state=0, gamma=0.10, C=10.0):
+        logger.info('using KernalSVM')
+        np.random.seed(0)
+        X_xor = np.random.randn(200, 2)
+        y_xor = np.logical_xor(X_xor[:, 0] > 0,
+                               X_xor[:, 1] > 0)
+        y_xor = np.where(y_xor, 1, -1)
+
+        svm = SVC(kernel=kernel, random_state=random_state, gamma=gamma, C=C)
         svm.fit(X_xor, y_xor)
         self.classifierUtil.plot_decision_regions(X_xor, y_xor,classifier=svm)
 
@@ -47,22 +55,15 @@ class KernalSVMNonLinearProblem(ClassifierBase):
         # plt.savefig('./figures/support_vector_machine_rbf_xor.png', dpi=300)
         plt.show()
 
-        svm = SVC(kernel='rbf', random_state=0, gamma=0.2, C=1.0)
+    def plot(self,kernel='rbf', random_state=0, gamma=0.10, C=10.0):
+        logger.info('using KernalSVM')
+        svm = SVC(kernel=kernel, random_state=random_state, gamma=gamma, C=C)
         svm.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
 
-        self.classifierUtil.plot_decision_regions(self.datasetloader.X_combined_std,self.datasetloader.y_combined,classifier=svm, test_idx=range(105, 150))
+        self.classifierUtil.plot_decision_regions(self.datasetloader.X_combined_std, self.datasetloader.y_combined,
+                                                  classifier=svm, test_idx=range(105, 150))
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
         # plt.savefig('./figures/support_vector_machine_rbf_iris_1.png', dpi=300)
-        plt.show()
-
-        svm = SVC(kernel='rbf', random_state=0, gamma=100.0, C=1.0)
-        svm.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
-
-        self.classifierUtil.plot_decision_regions(self.datasetloader.X_combined_std,self.datasetloader.y_combined,classifier=svm, test_idx=range(105, 150))
-        plt.xlabel('petal length [standardized]')
-        plt.ylabel('petal width [standardized]')
-        plt.legend(loc='upper left')
-        # plt.savefig('./figures/support_vector_machine_rbf_iris_2.png', dpi=300)
         plt.show()
