@@ -10,6 +10,6 @@ Alot of the code relies on: NumPy,SciPy,scikit-learn, matplotlib,pandas
 (I have included a requirements.txt with the full list of dependencies)
 
 ## disclaimer
-Feel free to clone, reuse in any manor, keeping in mind the intent of this code is to study Python from a ML perspective. no attempt to create production quality code has been taken. Also these are my early python days (I am primarily a java guy) and most importantly the work is heavily based on Sebastian Raschka's book. 
+Feel free to clone, reuse in any manor, keeping in mind the intent of this code is to study Python from a ML perspective. no attempt to create production quality code has been taken. Also these are my early python days (I am primarily a java guy) and most importantly the work is based on Sebastian Raschka's book. 
 
 
