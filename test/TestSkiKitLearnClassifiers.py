@@ -6,15 +6,22 @@ from skikitlearnclassifiers import PerceptronClassifier
 from skikitlearnclassifiers import SupportVectorMachine
 from skikitlearnclassifiers import KernalSVMNonLinearProblem
 
-
+'''
+Many of these are technically not unit tests. However using the unit test framework is convenient way to
+work with the various libraries
+'''
 class TestSkiKitLearnClassifiers(unittest.TestCase):
 
     def test_linear_regression(self):
         pc = LinearRegressionClassifier.LinearRegressionClassifier()
+        pc.plot_sigmoid()
+        pc.plot_cost()
         pc.plot()
+        pc.plot_regression_path()
 
     def test_perceptron(self):
         lrc = PerceptronClassifier.PerceptronClassifier()
+        y_pred = lrc.predict();
         lrc.plot()
 
     def test_svm(self):

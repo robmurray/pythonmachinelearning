@@ -1,4 +1,3 @@
-import numpy as np
 from sklearn.linear_model import Perceptron
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
@@ -10,29 +9,32 @@ logger = logging.getLogger(__name__)
 
 class PerceptronClassifier(ClassifierBase):
 
-    def plot(self):
+    def __init__(self, n_iter=40, eta0=0.1, random_state=0):
+        super(PerceptronClassifier, self,).__init__()
+        self.ppn = Perceptron(n_iter=n_iter, eta0=eta0, random_state=random_state)
+        self.ppn.fit(self.X_train_std, self.y_train)
+        logger.debug('Perceptron: %s', self.ppn)
+
+    def predict(self):
+        y_pred = self.ppn.predict(self.X_test_std)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug('results: %s', y_pred)
+            logger.debug('Misclassified samples: %d' % (self.y_test != y_pred).sum())
+            logger.debug('Accuracy: %.2f' % accuracy_score(self.y_test, y_pred))
+
+        return y_pred
+
+    def plot(self,save_image=False):
         logger.info('plotting perseptron')
-        ppn = Perceptron(n_iter=40, eta0=0.1, random_state=0)
-        ppn.fit(self.X_train_std, self.y_train)
 
-        logger.debug('Perceptron: %s', ppn)
-
-        # results
-        y_pred = ppn.predict(self.X_test_std)
-
-        logger.info('Misclassified samples: %d' % (self.y_test != y_pred).sum())
-        logger.info('Accuracy: %.2f' % accuracy_score(self.y_test, y_pred))
-
-        #plot
-        X_combined_std = np.vstack((self.X_train_std, self.X_test_std))
-        y_combined = np.hstack((self.y_train, self.y_test))
-
-        self.plot_decision_regions(X=X_combined_std, y=y_combined,classifier=ppn, test_idx=range(105, 150))
+        self.plot_decision_regions(X=self.X_combined_std, y=self.y_combined,classifier=self.ppn, test_idx=range(105, 150))
 
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
         plt.title('Perceptron classifier')
-        #plt.tight_layout()
-        # plt.savefig('./figures/iris_perceptron_scikit.png', dpi=300)
+
+        if save_image:
+            plt.savefig('./figures/iris_perceptron_scikit.png', dpi=300)
+
         plt.show()

@@ -42,6 +42,8 @@ class ClassifierBase(object):
         sc.fit(self.X_train)
         self.X_train_std = sc.transform(self.X_train)
         self.X_test_std = sc.transform(self.X_test)
+        self.X_combined_std = np.vstack((self.X_train_std, self.X_test_std))
+        self.y_combined = np.hstack((self.y_train, self.y_test))
 
     def cost_1(self,z):
         cost = - np.log(self.sigmoid(z))

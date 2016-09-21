@@ -12,8 +12,6 @@ class KernalSVMNonLinearProblem(ClassifierBase):
 
     def plot(self):
         logger.info('using KernalSVM')
-        X_combined_std = np.vstack((self.X_train_std, self.X_test_std))
-        y_combined = np.hstack((self.y_train, self.y_test))
 
         np.random.seed(0)
         X_xor = np.random.randn(200, 2)
@@ -48,7 +46,7 @@ class KernalSVMNonLinearProblem(ClassifierBase):
         svm = SVC(kernel='rbf', random_state=0, gamma=0.2, C=1.0)
         svm.fit(self.X_train_std, self.y_train)
 
-        self.plot_decision_regions(X_combined_std, y_combined,classifier=svm, test_idx=range(105, 150))
+        self.plot_decision_regions(self.X_combined_std, self.y_combined,classifier=svm, test_idx=range(105, 150))
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
@@ -58,7 +56,7 @@ class KernalSVMNonLinearProblem(ClassifierBase):
         svm = SVC(kernel='rbf', random_state=0, gamma=100.0, C=1.0)
         svm.fit(self.X_train_std, self.y_train)
 
-        self.plot_decision_regions(X_combined_std, y_combined,classifier=svm, test_idx=range(105, 150))
+        self.plot_decision_regions(self.X_combined_std, self.y_combined,classifier=svm, test_idx=range(105, 150))
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
