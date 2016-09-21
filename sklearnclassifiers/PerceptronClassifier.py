@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 
 class PerceptronClassifier(ClassifierBase):
 
-    def __init__(self, datasetloader):
-        super(self.__class__, self).__init__(datasetloader)
+    def __init__(self, datasetloader,save_image=False):
+        super(self.__class__, self).__init__(datasetloader,save_image)
         logger.debug('Perceptron')
 
     def predict(self,n_iter=40, eta0=0.1, random_state=0):
@@ -26,7 +26,7 @@ class PerceptronClassifier(ClassifierBase):
 
         return y_pred
 
-    def plot(self,n_iter=40, eta0=0.1, random_state=0,save_image=False):
+    def plot(self,n_iter=40, eta0=0.1, random_state=0):
         logger.info('plotting perseptron')
         ppn = Perceptron(n_iter=n_iter, eta0=eta0, random_state=random_state)
         ppn.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
@@ -39,7 +39,7 @@ class PerceptronClassifier(ClassifierBase):
         plt.legend(loc='upper left')
         plt.title('Perceptron classifier')
 
-        if save_image:
+        if self.save_image:
             plt.savefig('./figures/iris_perceptron_scikit.png', dpi=300)
 
         plt.show()

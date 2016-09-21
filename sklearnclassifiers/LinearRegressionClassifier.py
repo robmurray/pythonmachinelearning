@@ -9,11 +9,11 @@ logger = logging.getLogger(__name__)
 
 class LinearRegressionClassifier(ClassifierBase):
 
-    def __init__(self, datasetloader):
-        super(self.__class__, self).__init__(datasetloader)
+    def __init__(self, datasetloader,save_image=False):
+        super(self.__class__, self).__init__(datasetloader,save_image)
         logger.debug('Linear regression')
 
-    def plot_sigmoid(self, save_image=False):
+    def plot_sigmoid(self):
         z = np.arange(-7, 7, 0.1)
         phi_z = self.classifierUtil.sigmoid(z)
 
@@ -28,12 +28,12 @@ class LinearRegressionClassifier(ClassifierBase):
         ax = plt.gca()
         ax.yaxis.grid(True)
 
-        if save_image:
+        if self.save_image:
             plt.savefig('./figures/sigmoid.png', dpi=300)
 
         plt.show()
 
-    def plot_cost(self, save_image=False):
+    def plot_cost(self):
         z = np.arange(-10, 10, 0.1)
         phi_z = self.classifierUtil.sigmoid(z)
 
@@ -48,12 +48,12 @@ class LinearRegressionClassifier(ClassifierBase):
         plt.xlabel('$\phi$(z)')
         plt.ylabel('J(w)')
         plt.legend(loc='best')
-        if save_image:
+        if self.save_image:
             plt.savefig('./figures/log_cost.png', dpi=300)
 
         plt.show()
 
-    def plot(self,save_image=False):
+    def plot(self):
         logger.info('plotting linear regression classifier')
         lr = LogisticRegression(C=1000.0, random_state=0)
         lr.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
@@ -64,11 +64,11 @@ class LinearRegressionClassifier(ClassifierBase):
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
         plt.title('linear regression classifier')
-        if save_image:
+        if self.save_image:
             plt.savefig('./figures/logistic_regression.png', dpi=300)
         plt.show()
 
-    def plot_regression_path(self,save_image=False):
+    def plot_regression_path(self):
         logging.info('regularization')
         weights, params = [], []
         for c in np.arange(-5, 5):
@@ -84,7 +84,7 @@ class LinearRegressionClassifier(ClassifierBase):
         plt.xlabel('C')
         plt.legend(loc='upper left')
         plt.xscale('log')
-        if save_image:
+        if self.save_image:
             plt.savefig('./figures/regression_path.png', dpi=300)
         plt.show()
 

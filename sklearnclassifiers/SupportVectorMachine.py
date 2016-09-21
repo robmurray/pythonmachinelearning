@@ -8,8 +8,8 @@ logger = logging.getLogger(__name__)
 
 
 class SupportVectorMachine(ClassifierBase):
-    def __init__(self, datasetloader):
-        super(self.__class__, self).__init__(datasetloader)
+    def __init__(self, datasetloader,save_image=False):
+        super(self.__class__, self).__init__(datasetloader,save_image)
         logger.debug('SVM')
 
     def plot(self):
@@ -22,7 +22,7 @@ class SupportVectorMachine(ClassifierBase):
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
         plt.title('Maximum margin classification with support vector machines')
-
-        # plt.savefig('./figures/support_vector_machine_linear.png', dpi=300)
+        if self.save_image:
+            plt.savefig('./figures/support_vector_machine_linear.png', dpi=300)
         plt.show()
 

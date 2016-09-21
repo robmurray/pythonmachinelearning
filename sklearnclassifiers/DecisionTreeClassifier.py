@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 
 class DecisionTreeClassifier(ClassifierBase):
 
-    def __init__(self, datasetloader):
-        super(self.__class__, self).__init__(datasetloader)
+    def __init__(self, datasetloader,save_image=False):
+        super(self.__class__, self).__init__(datasetloader,save_image)
         logger.debug('Decision tree')
 
     def gini(self,p):
@@ -50,7 +50,8 @@ class DecisionTreeClassifier(ClassifierBase):
         plt.ylim([0, 1.1])
         plt.xlabel('p(i=1)')
         plt.ylabel('Impurity Index')
-        # plt.savefig('./figures/impurity.png', dpi=300, bbox_inches='tight')
+        if self.save_image:
+            plt.savefig('./figures/impurity.png', dpi=300, bbox_inches='tight')
         plt.show()
 
         #fixme appear to be a library version conflict in Tree
