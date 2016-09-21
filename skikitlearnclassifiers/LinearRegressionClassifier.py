@@ -9,9 +9,13 @@ logger = logging.getLogger(__name__)
 
 class LinearRegressionClassifier(ClassifierBase):
 
+    def __init__(self, datasetloader):
+        super(self.__class__, self).__init__(datasetloader)
+        logger.debug('Linear regression')
+
     def plot_sigmoid(self, save_image=False):
         z = np.arange(-7, 7, 0.1)
-        phi_z = self.sigmoid(z)
+        phi_z = self.classifierUtil.sigmoid(z)
 
         plt.plot(z, phi_z)
         plt.axvline(0.0, color='k')
@@ -31,12 +35,12 @@ class LinearRegressionClassifier(ClassifierBase):
 
     def plot_cost(self, save_image=False):
         z = np.arange(-10, 10, 0.1)
-        phi_z = self.sigmoid(z)
+        phi_z = self.classifierUtil.sigmoid(z)
 
-        c1 = [self.cost_1(x) for x in z]
+        c1 = [self.classifierUtil.cost_1(x) for x in z]
         plt.plot(phi_z, c1, label='J(w) if y=1')
 
-        c0 = [self.cost_0(x) for x in z]
+        c0 = [self.classifierUtil.cost_0(x) for x in z]
         plt.plot(phi_z, c0, linestyle='--', label='J(w) if y=0')
 
         plt.ylim(0.0, 5.1)
@@ -52,10 +56,10 @@ class LinearRegressionClassifier(ClassifierBase):
     def plot(self,save_image=False):
         logger.info('plotting linear regression classifier')
         lr = LogisticRegression(C=1000.0, random_state=0)
-        lr.fit(self.X_train_std, self.y_train)
-        logging.info('probability: %s',lr.predict_proba(self.X_test_std[0, :]))
+        lr.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
+        logging.info('probability: %s',lr.predict_proba(self.datasetloader.X_test_std[0, :]))
 
-        self.plot_decision_regions(self.X_combined_std, self.y_combined,classifier=lr, test_idx=range(105, 150))
+        self.classifierUtil.plot_decision_regions(self.datasetloader.X_combined_std,self.datasetloader.y_combined,classifier=lr, test_idx=range(105, 150))
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
@@ -69,7 +73,7 @@ class LinearRegressionClassifier(ClassifierBase):
         weights, params = [], []
         for c in np.arange(-5, 5):
             lr = LogisticRegression(C=10 ** c, random_state=0)
-            lr.fit(self.X_train_std, self.y_train)
+            lr.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
             weights.append(lr.coef_[1])
             params.append(10 ** c)
 

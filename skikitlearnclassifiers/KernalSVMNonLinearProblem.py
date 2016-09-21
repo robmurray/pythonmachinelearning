@@ -10,6 +10,10 @@ logger = logging.getLogger(__name__)
 
 class KernalSVMNonLinearProblem(ClassifierBase):
 
+    def __init__(self, datasetloader):
+        super(self.__class__, self).__init__(datasetloader)
+        logger.debug('Linear regression')
+
     def plot(self):
         logger.info('using KernalSVM')
 
@@ -37,16 +41,16 @@ class KernalSVMNonLinearProblem(ClassifierBase):
 
         svm = SVC(kernel='rbf', random_state=0, gamma=0.10, C=10.0)
         svm.fit(X_xor, y_xor)
-        self.plot_decision_regions(X_xor, y_xor,classifier=svm)
+        self.classifierUtil.plot_decision_regions(X_xor, y_xor,classifier=svm)
 
         plt.legend(loc='upper left')
         # plt.savefig('./figures/support_vector_machine_rbf_xor.png', dpi=300)
         plt.show()
 
         svm = SVC(kernel='rbf', random_state=0, gamma=0.2, C=1.0)
-        svm.fit(self.X_train_std, self.y_train)
+        svm.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
 
-        self.plot_decision_regions(self.X_combined_std, self.y_combined,classifier=svm, test_idx=range(105, 150))
+        self.classifierUtil.plot_decision_regions(self.datasetloader.X_combined_std,self.datasetloader.y_combined,classifier=svm, test_idx=range(105, 150))
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
@@ -54,9 +58,9 @@ class KernalSVMNonLinearProblem(ClassifierBase):
         plt.show()
 
         svm = SVC(kernel='rbf', random_state=0, gamma=100.0, C=1.0)
-        svm.fit(self.X_train_std, self.y_train)
+        svm.fit(self.datasetloader.X_train_std, self.datasetloader.y_train)
 
-        self.plot_decision_regions(self.X_combined_std, self.y_combined,classifier=svm, test_idx=range(105, 150))
+        self.classifierUtil.plot_decision_regions(self.datasetloader.X_combined_std,self.datasetloader.y_combined,classifier=svm, test_idx=range(105, 150))
         plt.xlabel('petal length [standardized]')
         plt.ylabel('petal width [standardized]')
         plt.legend(loc='upper left')
